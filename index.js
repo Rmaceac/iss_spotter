@@ -3,14 +3,36 @@ const { nextISSTimesForMyLocation } = require('./iss');
 // const ipAddress = "107.190.19.199";
 // const latLong = { latitude: 48.4152, longitude: -123.3655 };
 
+const dateFormatter = (milliseconds) => {
+  // convert to numbered format
+  const date = new Date(milliseconds);
+  // return date in string format
+  return date.toString();
+};
+
 nextISSTimesForMyLocation((error, passTimes) => {
   if (error) {
     return console.log("It didn't work!", error);
   }
-  // success, print out the deets!
-  console.log(passTimes);
+  
+  for (const pass of passTimes) {
+    const duration = pass.duration;
+    const dateString = dateFormatter(pass.risetime);
+    console.log(`Next pass at ${dateString} for ${duration} seconds!`);
+  }
+  
 });
 
+
+
+
+
+
+
+
+
+
+// OLD TESTS FOR INDIVIDUAL FUNCTIONS IN ISS.JS
 
 // fetchMyIP((error, ip) => {
 //   if (error) {
